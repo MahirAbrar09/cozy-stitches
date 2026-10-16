@@ -52,21 +52,6 @@
   ],
   "products": [
     {
-      "slug": "bow-garden-tote",
-      "name": "kalo shada",
-      "category": "bags",
-      "code": "CS-BAG-01",
-      "price": 300,
-      "priceNote": "",
-      "featured": true,
-      "blurb": "White cotton tote scattered with hand-stitched bows in wine, rose and blush.",
-      "description": "A roomy everyday tote in sturdy white cotton, worked with dozens of small satin-stitch bows. Each bow is sewn by hand, so the spacing and the tilt of the petals shift a little from one tote to the next. Lined in plain cotton, with a slip pocket inside for a phone.",
-      "materials": "Handloom cotton outer, cotton lining, cotton embroidery thread",
-      "care": "Spot clean by hand in cool water. Dry flat in shade. Warm iron on the reverse, keeping the iron off the embroidery.",
-      "images": [],
-      "alt": "White hand-embroidered tote bag carried over a maroon kurta"
-    },
-    {
       "slug": "midnight-floral-crossbody",
       "name": "Midnight Floral Crossbody",
       "category": "bags",
