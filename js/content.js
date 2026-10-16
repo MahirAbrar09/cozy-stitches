@@ -71,7 +71,7 @@ window.COZY = {
       "name": "kalo shada",
       "category": "bags",
       "code": "CS-BAG-01",
-      "price": 999,
+      "price": 300,
       "priceNote": "",
       "featured": true,
       "blurb": "White cotton tote scattered with hand-stitched bows in wine, rose and blush.",
