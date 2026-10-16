@@ -23,9 +23,9 @@ window.COZY = {
   },
   "channels": {
     "messenger": "cozy.stitches07",
-    "whatsapp": "",
+    "whatsapp": "8801891759796",
     "instagram": "cozy_stitches007",
-    "email": ""
+    "email": "nuzhatsadia07@gmail.com"
   },
   "order": {
     "priority": [
