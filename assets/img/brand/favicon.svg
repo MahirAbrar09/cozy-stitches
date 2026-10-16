@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 50 400 400" role="img" aria-label="Cozy Stitches">
+  <title>Cozy Stitches</title>
+  <!--
+    Favicon build of the emblem. At 16px the header mark's stroke weight still
+    thins to under a pixel, so this variant sits on the logo's canvas blue and
+    draws everything heavier. Use this file only for tab icons; use mark.svg
+    everywhere the logo is actually looked at.
+  -->
+  <rect x="50" y="50" width="400" height="400" rx="72" fill="#7ba0b8"/>
+  <circle cx="250" cy="250" r="176" fill="#8cb3c9"/>
+  <g transform="translate(250 250) scale(1.75) translate(0 21)"
+     stroke="#2b2353" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M 0,28 C -18,12 -35,-2 -48,-18 C -58,-31 -50,-52 -33,-52 C -18,-52 -5,-35 0,-20"
+          stroke-dasharray="16 15"/>
+    <path d="M 0,28 C 18,12 35,-2 48,-18 C 58,-31 50,-52 33,-52 C 18,-52 5,-35 0,-20"/>
+    <path d="M 3,-38 C -12,-58 -2,-70 8,-62 C 15,-56 2,-42 -8,-48 C -14,-51 -12,-58 -3,-56"
+          stroke-width="10"/>
+    <path d="M 2.5,-42 L 2.5,25 L 0,28 L -2.5,25 L -2.5,-42 Z" fill="#2b2353"/>
+    <ellipse cx="0" cy="-35" rx="0.9" ry="3.6" fill="#8cb3c9" stroke="none"/>
+  </g>
+</svg>

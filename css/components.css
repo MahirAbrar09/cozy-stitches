@@ -1,0 +1,764 @@
+/* ==========================================================================
+   Cozy Stitches — components: buttons, tiles, chips, dialog, channels
+   ========================================================================== */
+
+/* --- buttons ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  max-width: 100%;
+  padding: 0.7em 1.2em;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background-color: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease),
+              border-color 160ms var(--ease),
+              color 160ms var(--ease),
+              transform var(--dur-press) var(--ease);
+}
+
+.btn--primary {
+  background-color: var(--thread-btn);
+  border-color: var(--thread-btn);
+  color: var(--white);
+}
+
+.btn--primary:hover {
+  background-color: var(--thread-deep);
+  border-color: var(--thread-deep);
+  color: var(--white);
+}
+
+.btn--secondary {
+  border-color: var(--edge-strong);
+  color: var(--ink);
+}
+
+.btn--secondary:hover {
+  border-color: var(--ink);
+  background-color: var(--white);
+}
+
+.btn--quiet {
+  padding-inline: 0.25em;
+  color: var(--thread-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.btn--quiet:hover { text-decoration-thickness: 2px; }
+
+.btn--sm { padding: 0.5em 0.85em; font-size: var(--step--1); }
+
+.btn--block { width: 100%; }
+
+.btn__icon {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+}
+
+.section--dark .btn--secondary {
+  border-color: rgba(244, 242, 239, 0.5);
+  color: var(--on-dark);
+}
+
+.section--dark .btn--secondary:hover {
+  border-color: var(--on-dark);
+  background-color: rgba(244, 242, 239, 0.08);
+}
+
+.section--dark .btn--primary {
+  background-color: var(--on-dark);
+  border-color: var(--on-dark);
+  color: var(--ink);
+}
+
+.section--dark .btn--primary:hover {
+  background-color: var(--white);
+  border-color: var(--white);
+  color: var(--ink);
+}
+
+/* --- action rows -------------------------------------------------------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: center;
+}
+
+.actions--stack {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* --- product tile ------------------------------------------------------- */
+.tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--paper);
+  border: var(--edge-line);
+  box-shadow: var(--shadow);
+  /* Only box-shadow moves. A transform was declared here but never set, so it
+     was a transition for a property that never changed. */
+  transition: box-shadow 200ms var(--ease);
+}
+
+.tile:focus-within,
+.tile:hover { box-shadow: var(--shadow-lift); }
+
+.tile__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--sky-wash);
+}
+
+/* Direct child only: the placeholder emblem is an <img> nested one level
+   deeper inside .placeholder and must keep its own small size. */
+.tile__media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The stitched seam where the label is sewn onto the piece. */
+.tile__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  border-top: 1px dashed var(--sky);
+}
+
+.tile__name {
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.tile__name a { color: var(--ink); text-decoration: none; }
+
+.tile__name a::after {
+  /* Whole tile is the click target. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.tile { position: relative; }
+
+.tile__name a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+
+.tile__tag {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.tile__price {
+  margin-top: auto;
+  padding-top: var(--s-3);
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--thread-ink);
+}
+
+/* --- placeholder (shown until real photographs arrive) ------------------ */
+.placeholder {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  height: 100%;
+  padding: var(--s-5);
+  text-align: center;
+  background-color: var(--sky-wash);
+  /* The logo's own background texture: 16px grid of #5c788e dots at 40%. */
+  background-image: radial-gradient(
+    circle at center,
+    rgba(92, 120, 142, 0.38) 0 1px,
+    transparent 1.5px
+  );
+  background-size: 16px 16px;
+  color: var(--ink-soft);
+}
+
+.placeholder__mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--sky);
+}
+
+.placeholder__name {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.placeholder__note {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  max-width: 26ch;
+}
+
+/* --- the full logo, presented ------------------------------------------- */
+/* The artwork carries its own canvas colour and dot texture, so it needs no
+   frame — a shadow is enough to lift it off the page and read it as a plate
+   rather than as an image pasted into a box. */
+.brand-plate {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 20rem);
+  box-shadow: var(--shadow-lift);
+}
+
+.brand-plate--small { max-width: min(100%, 11rem); }
+
+/* Fills the hero frame until a photograph exists. The single 1fr row gives the
+   plate a definite height to measure against, so max-height actually resolves
+   and the logo can never push past the frame. */
+.hero-brand {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--s-5);
+}
+
+.hero-brand .brand-plate { max-height: 100%; }
+
+/* The About page's framed presentation of the mark. */
+.mark-plate {
+  margin: 0;
+  padding: var(--s-5);
+  background-color: var(--paper);
+  border: var(--edge-line);
+  box-shadow: var(--shadow);
+}
+
+.mark-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page-head .brand-plate { margin-bottom: var(--s-6); }
+
+/* --- chips (filter buttons, copy-reference) ----------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.45em 0.9em;
+  border: 1px solid var(--edge-strong);
+  border-radius: var(--radius);
+  background-color: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease),
+              border-color 160ms var(--ease),
+              color 160ms var(--ease),
+              transform var(--dur-press) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--thread);
+  color: var(--thread-deep);
+}
+
+.chip[aria-pressed="true"],
+.chip[aria-current="true"] {
+  background-color: var(--sky-wash);
+  border-color: var(--thread);
+  color: var(--thread-deep);
+}
+
+.chip__count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.chip[aria-pressed="true"] .chip__count { color: var(--thread-deep); }
+
+.chip--code {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+/* --- category card ------------------------------------------------------ */
+.category-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  height: 100%;
+  padding: var(--s-5);
+  border: var(--edge-line);
+  background-color: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: box-shadow 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.category-card:hover {
+  border-color: var(--thread);
+  box-shadow: var(--shadow-lift);
+}
+
+.category-card__name {
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.category-card__count {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.category-card__seam {
+  /* Pushed to the bottom so the stitched seam sits at the same height on
+     every card, whether its name ran to one line or two. */
+  margin-top: auto;
+  padding-top: var(--s-3);
+  border-top: 1px dashed var(--sky);
+  font-size: var(--step--1);
+  color: var(--thread-ink);
+  font-weight: 600;
+}
+
+/* --- detail dialog ------------------------------------------------------ */
+.detail {
+  width: min(58rem, calc(100vw - 2rem));
+  max-width: none;
+  max-height: min(90vh, 48rem);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius);
+  background-color: var(--paper);
+  color: var(--text);
+  box-shadow: var(--shadow-lift);
+}
+
+/* The dialog grows into place instead of appearing. A modal stays centred
+   rather than growing from a trigger, so there is no transform-origin to set.
+   Browsers without @starting-style show it instantly, exactly as before. */
+.detail {
+  transition: opacity var(--dur-surface) var(--ease),
+              transform var(--dur-surface) var(--ease);
+}
+
+@supports (transition-behavior: allow-discrete) {
+  .detail {
+    transition: opacity var(--dur-surface) var(--ease),
+                transform var(--dur-surface) var(--ease),
+                overlay var(--dur-surface) allow-discrete,
+                display var(--dur-surface) allow-discrete;
+  }
+}
+
+@starting-style {
+  .detail[open] {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+.detail::backdrop {
+  background-color: rgba(43, 35, 83, 0.6);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  transition: background-color var(--dur-surface) var(--ease);
+}
+
+@supports (transition-behavior: allow-discrete) {
+  .detail::backdrop {
+    transition: background-color var(--dur-surface) var(--ease),
+                overlay var(--dur-surface) allow-discrete,
+                display var(--dur-surface) allow-discrete;
+  }
+}
+
+@starting-style {
+  .detail[open]::backdrop { background-color: rgba(43, 35, 83, 0); }
+}
+
+.detail__scroll {
+  position: relative; /* anchors the close button to the whole dialog */
+  display: grid;
+  gap: 0;
+  max-height: min(90vh, 48rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 46rem) {
+  .detail__scroll {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: stretch;
+  }
+}
+
+.detail__media {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 4 / 3;
+  min-height: 14rem;
+  background-color: var(--sky-wash);
+}
+
+/* Side by side, the media must fill the full height of the copy column rather
+   than keep its own aspect ratio and leave a gap underneath. */
+@media (min-width: 46rem) {
+  .detail__media { aspect-ratio: auto; min-height: 22rem; }
+}
+
+/* Direct child only, for the same reason as .tile__media. The thumbnail strip
+   is the next sibling in this column. */
+.detail__media > img {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail__thumbs {
+  display: flex;
+  flex: none;
+  gap: var(--s-1);
+  padding: var(--s-1);
+  overflow-x: auto;
+  background-color: var(--paper);
+  border-top: 1px dashed var(--sky);
+}
+
+.detail__thumb {
+  flex: none;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition: border-color 160ms var(--ease),
+              transform var(--dur-press) var(--ease);
+}
+
+.detail__thumb:hover { border-color: var(--sky); }
+
+.detail__thumb[aria-pressed="true"] { border-color: var(--thread); }
+
+.detail__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-6) var(--s-6) 0;
+}
+
+.detail__close {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-3);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--edge-strong);
+  border-radius: var(--radius);
+  background-color: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.detail__title { margin: 0; font-size: var(--step-3); }
+
+.detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.detail__note {
+  margin: 0;
+  padding: var(--s-4);
+  border-left: 3px solid var(--sky);
+  background-color: var(--sky-wash);
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.detail__specs {
+  display: grid;
+  gap: var(--s-2);
+  margin: 0;
+  font-size: var(--step--1);
+}
+
+.detail__specs dt {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.detail__specs dd {
+  margin: 0 0 var(--s-2);
+  color: var(--ink-soft);
+}
+
+/* Kept in view while the description scrolls, so the order buttons are always
+   one tap away no matter how long the copy runs. */
+.detail__footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  margin-top: auto;
+  padding-block: var(--s-4) var(--s-5);
+  background-color: var(--paper);
+  border-top: 1px dashed var(--sky);
+}
+
+/* --- channels (contact page + footer) ----------------------------------- */
+.channels {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.channels > li { margin: 0; }
+
+.channel {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding: var(--s-4);
+  border: var(--edge-line);
+  background-color: var(--paper);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 160ms var(--ease);
+}
+
+.channel:hover { border-color: var(--thread); }
+
+.channel__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  color: var(--thread);
+}
+
+.channel__label {
+  display: block;
+  font-weight: 600;
+}
+
+.channel__handle {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+/* --- FAQ (native disclosure) -------------------------------------------- */
+.faq { border-top: var(--edge-line); }
+
+.faq__item { border-bottom: var(--edge-line); }
+
+.faq__summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-block: var(--s-4);
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq__summary::-webkit-details-marker { display: none; }
+
+.faq__summary:hover { color: var(--thread-deep); }
+
+.faq__summary::after {
+  content: "";
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0.35em;
+  border-right: 2px solid var(--thread);
+  border-bottom: 2px solid var(--thread);
+  transform: rotate(45deg);
+  transition: transform 200ms var(--ease);
+}
+
+.faq__item[open] .faq__summary::after { transform: rotate(225deg); }
+
+.faq__body {
+  padding-bottom: var(--s-5);
+  max-width: var(--measure);
+}
+
+/* A question opens rather than snapping. ::details-content and interpolate-size
+   are both recent, so this is pure enhancement: where they are missing,
+   questions behave exactly as abruptly as they did before. Nothing can get
+   stuck hidden, because the open state sets both properties explicitly. */
+.faq__item > details {
+  interpolate-size: allow-keywords;
+}
+
+.faq__item > details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  content-visibility: hidden;
+  transition: block-size var(--dur-surface) var(--ease),
+              content-visibility var(--dur-surface) allow-discrete;
+}
+
+.faq__item > details[open]::details-content {
+  block-size: auto;
+  content-visibility: visible;
+}
+
+/* --- reviews ------------------------------------------------------------ */
+.reviews {
+  display: grid;
+  gap: var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 48rem) {
+  .reviews { grid-template-columns: repeat(2, 1fr); }
+}
+
+.reviews > li { margin: 0; }
+
+.review {
+  height: 100%;
+  padding: var(--s-5);
+  border: var(--edge-line);
+  border-left: 3px solid var(--sky);
+  background-color: var(--paper);
+}
+
+.review__quote {
+  margin-bottom: var(--s-4);
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+}
+
+.review__quote p { max-width: none; }
+
+/* --- spec list (about: materials, care) --------------------------------- */
+.spec-list {
+  display: grid;
+  gap: var(--s-3) var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spec-list > li {
+  margin: 0;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px dashed var(--sky);
+}
+
+.spec-list__key {
+  display: block;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--thread-ink);
+}
+
+/* --- notice ------------------------------------------------------------- */
+.notice {
+  padding: var(--s-4) var(--s-5);
+  border: 1px dashed var(--sky);
+  background-color: var(--sky-wash);
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.notice p { max-width: var(--measure); }
+
+/* --- press feedback ------------------------------------------------------ */
+/* Buttons here are tapped a handful of times a session, not a hundred, so a
+   small squeeze is affordable — it is the cheapest way to make an interface
+   feel like it heard you. Kept under 3%: more reads as a bounce, and this is
+   not a playful brand. Keyboard activation deliberately gets nothing. */
+.btn:active,
+.chip:active,
+.nav-toggle:active,
+.detail__thumb:active {
+  transform: scale(0.97);
+}
+
+/* --- tiles arriving ------------------------------------------------------ */
+/* Applied by js/site.js only when a filter has changed what is visible, and
+   never on first paint: the opening grid must appear immediately. */
+.tile.is-entering {
+  animation: tile-in var(--dur-quick) var(--ease) both;
+}
+
+@keyframes tile-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --- stitch divider spacing --------------------------------------------- */
+.stitch-rule { margin-block: var(--s-7); }

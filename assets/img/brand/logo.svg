@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%" role="img" aria-label="Cozy Stitches — Threads &amp; Needles">
+  <title>Cozy Stitches — Threads &amp; Needles</title>
+  <!--
+    The original, unmodified logo file supplied by the brand.
+    This is the authoritative source for every colour and shape on the site:
+      ink     #2b2353   (heart, needle, wordmark, tagline)
+      badge   #8cb3c9   (inner circle)
+      canvas  #7ba0b8   (outer square)
+      dots    #5c788e   (background grid, 40% opacity)
+      display type  Playfair Display
+      sans type     Montserrat
+    Do not recolour anything here. Update css/tokens.css to match it instead.
+  -->
+  <defs>
+    <!-- Background grid dot pattern -->
+    <pattern id="gridDots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="0.8" fill="#5c788e" opacity="0.4" />
+    </pattern>
+  </defs>
+
+  <!-- Outer Canvas Background -->
+  <rect width="500" height="500" fill="#7ba0b8" />
+
+  <!-- Dotted Pattern Layer -->
+  <rect width="500" height="500" fill="url(#gridDots)" />
+
+  <!-- Main Circle Background -->
+  <circle cx="250" cy="250" r="200" fill="#8cb3c9" />
+
+  <!-- LOGO EMBLEM / HEART & NEEDLE -->
+  <g transform="translate(250, 150)" stroke="#2b2353" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+
+    <!-- Heart Left Side (Dashed / Stitched line) -->
+    <path d="M 0,28 C -18,12 -35,-2 -48,-18 C -58,-31 -50,-52 -33,-52 C -18,-52 -5,-35 0,-20"
+          stroke-dasharray="5 5" />
+
+    <!-- Heart Right Side (Solid line) -->
+    <path d="M 0,28 C 18,12 35,-2 48,-18 C 58,-31 50,-52 33,-52 C 18,-52 5,-35 0,-20" />
+
+    <!-- Looping Thread at top of Needle -->
+    <path d="M 3,-38 C -12,-58 -2,-70 8,-62 C 15,-56 2,-42 -8,-48 C -14,-51 -12,-58 -3,-56"
+          stroke-width="2.2" />
+
+    <!-- Needle Base/Body -->
+    <path d="M 2.5,-42 L 2.5,25 L 0,28 L -2.5,25 L -2.5,-42 Z" fill="#2b2353" />
+
+    <!-- Needle Eye -->
+    <ellipse cx="0" cy="-35" rx="1.2" ry="4" fill="#8cb3c9" stroke="none" />
+  </g>
+
+  <!-- BRAND NAME: Cozy Stitches -->
+  <text x="250" y="270"
+        font-family="'Playfair Display', 'Cormorant Garamond', 'Georgia', serif"
+        font-size="44"
+        fill="#2b2353"
+        text-anchor="middle"
+        letter-spacing="0.5">Cozy Stitches</text>
+
+  <!-- SCISSORS & TAGLINE GROUP -->
+  <g transform="translate(85, 295)">
+    <!-- Scissors -->
+    <g stroke="#2b2353" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Top Handle Loop -->
+      <circle cx="12" cy="10" r="7" />
+      <!-- Bottom Handle Loop -->
+      <circle cx="12" cy="40" r="7" />
+      <!-- Top Blade -->
+      <path d="M 18,13 L 30,23 L 78,35" />
+      <!-- Bottom Blade -->
+      <path d="M 18,37 L 30,27 L 78,15" />
+      <!-- Pivot Screw -->
+      <circle cx="30" cy="25" r="1.5" fill="#2b2353" />
+    </g>
+
+    <!-- Dashed Line through Scissor Blades -->
+    <line x1="72" y1="25" x2="115" y2="25" stroke="#2b2353" stroke-width="2" stroke-dasharray="4 3" />
+
+    <!-- Tagline: THREADS & NEEDLES -->
+    <text x="120" y="31"
+          font-family="'Montserrat', 'Helvetica Neue', 'Arial', sans-serif"
+          font-size="16"
+          font-weight="600"
+          fill="#2b2353"
+          letter-spacing="3.5">THREADS &amp; NEEDLES</text>
+  </g>
+
+  <!-- DECORATIVE ZIGZAG STITCHES -->
+  <g stroke="#2b2353" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+    <!-- Top Zigzag Line -->
+    <path d="M 140,362
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5" />
+
+    <!-- Bottom Zigzag Line -->
+    <path d="M 140,372
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5
+             l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5 l 4,-5 l 4,5" />
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+# The whole project is published, so keep the parts that are not the website
+# out of reach. Netlify and Cloudflare Pages read this file; GitHub Pages does
+# not, which is only a cosmetic difference there.
+
+/tools/*            /404.html   404
+/README.md          /404.html   404
+/CONTENT-GUIDE.md   /404.html   404
+/package.json       /404.html   404
+/netlify.toml       /404.html   404
+/_redirects         /404.html   404

@@ -1,0 +1,10 @@
+# Cozy Stitches — robots.txt
+# Once the site has a domain, replace the Sitemap line below and in sitemap.xml.
+
+User-agent: *
+Allow: /
+
+# The 404 page should never be indexed.
+Disallow: /404.html
+
+# Sitemap: https://REPLACE-WITH-YOUR-DOMAIN/sitemap.xml

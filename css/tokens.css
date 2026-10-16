@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Cozy Stitches — design tokens
+   --------------------------------------------------------------------------
+   EVERY value here comes from the brand's own artwork. assets/img/brand/
+   logo.svg is the authority; it declares both the colours and the typefaces:
+
+     ink     #2b2353   the heart, needle, wordmark and tagline
+     badge   #8cb3c9   the inner circle
+     canvas  #7ba0b8   the outer square
+     dots    #5c788e   the background grid, at 40% opacity
+
+     display type   Playfair Display   — the "Cozy Stitches" wordmark
+     sans type      Montserrat         — "THREADS & NEEDLES"
+
+   When the logo changes, change the values here to match it. Nothing else in
+   the stylesheets hard-codes a colour or a family.
+
+   Two derivations are deliberate:
+     • --linen (#ebe8e4) is the fabric the products are photographed on. It is
+       warmer than the logo's blue and lets the blue-greys act as fields
+       instead of flooding the page.
+     • --thread and --thread-ink are the logo's blue pushed to a saturation
+       and lightness that clear WCAG AA where they are used. The logo itself
+       contains no bright accent, so any accent has to be derived.
+   ========================================================================== */
+
+:root {
+  /* --- ink & ground ------------------------------------------------------ */
+  --ink:          #2b2353;   /* the logo's ink, verbatim */
+  --ink-soft:     #4a4470;   /* 7.3:1 on --linen */
+  --ink-muted:    #5f5a7d;   /* 5.3:1 on --linen */
+  --linen:        #ebe8e4;   /* the photographed fabric */
+  --paper:        #f7f6f4;
+  --white:        #ffffff;
+  --edge:         #d5d2dd;
+  --edge-strong:  #b6b2c2;
+
+  /* --- brand blues ------------------------------------------------------- */
+  --sky:          #8cb3c9;   /* the logo's badge, verbatim */
+  --sky-deep:     #7ba0b8;   /* the logo's canvas, verbatim */
+  --sky-pale:     #d3e3ec;
+  --sky-wash:     #eaf1f6;
+  --dot:          #5c788e;   /* the logo's dot grid, verbatim */
+
+  /* --- derived accent ---------------------------------------------------- */
+  --thread:        #3d7fc1;  /* graphics and 24px+ text only: 3.4:1 on linen */
+  --thread-btn:    #1f5f8b;  /* button fill behind white text: 6.8:1 */
+  --thread-ink:    #1f5f8b;  /* links and body-size blue: 5.6:1 on linen */
+  --thread-deep:   #164863;
+
+  /* --- semantic ---------------------------------------------------------- */
+  --text:         var(--ink);
+  --text-muted:   var(--ink-muted);
+  --surface:      var(--paper);
+  --page:         var(--linen);
+  --link:         var(--thread-ink);
+  --focus:        #164863;
+  --on-dark:      #f4f2ef;
+  --on-dark-muted:#cfcadf;   /* 9.0:1 on --ink */
+
+  /* --- type -------------------------------------------------------------- */
+  /* Two families, both named by the logo itself, and clearly distinct: a
+     high-contrast didone-derived serif for display, a geometric grotesque for
+     everything a person has to read at length. Both are subsets that include
+     Latin; Noto Sans Bengali is requested separately for the one Bengali
+     category name (কাঁচ). */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body:    "Montserrat", "Noto Sans Bengali", "Nirmala UI", system-ui, sans-serif;
+
+  --step--1:  0.875rem;
+  --step-0:   1.0625rem;
+  --step-1:   1.3rem;
+  --step-2:   1.65rem;
+  --step-3:   2.15rem;
+  --step-4:   2.85rem;
+  --step-5:   3.5rem;
+  --step-6:   clamp(2.6rem, 5.6vw, 4.25rem);
+
+  --leading-tight: 1.15;
+  --leading-snug:  1.35;
+  --leading-body:  1.7;
+  --measure:        66ch;
+  --measure-tight:  46ch;
+
+  /* Playfair is a didone: it wants much less negative tracking than a
+     transitional serif, and its small x-height needs the extra size. */
+  --tracking-display: -0.012em;
+
+  /* --- space ------------------------------------------------------------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  /* --- structure --------------------------------------------------------- */
+  --radius:   2px;           /* the only radius in the system */
+  --shell:    76rem;
+  --gutter:   clamp(1.25rem, 5vw, 4rem);
+  --edge-line: 1px solid var(--edge);
+  --shadow:   0 1px 2px rgba(43, 35, 83, 0.06),
+              0 10px 28px -14px rgba(43, 35, 83, 0.22);
+  --shadow-lift: 0 2px 4px rgba(43, 35, 83, 0.08),
+                 0 22px 44px -18px rgba(43, 35, 83, 0.28);
+
+  /* --- the stitch motif -------------------------------------------------- */
+  /* A running stitch reads as thread, not as a dashed hairline: thicker
+     stroke, round caps, wider gap. See .stitch-line and .stitch-rule. */
+  --stitch-width: 2px;
+  --stitch-dash:  7 6;
+
+  /* --- motion ------------------------------------------------------------
+     One curve for everything, so the site moves as one thing: quick off the
+     mark, unhurried to settle. Nothing here is bouncy or elastic, because the
+     brand is not — it is thread being laid down by hand.
+
+     Durations stay under 300ms except the hero stitch, which is the single
+     moment allowed to take its time. */
+  --ease: cubic-bezier(0.32, 0.72, 0.28, 1);
+
+  --dur-press:   130ms;   /* a button acknowledging the tap */
+  --dur-quick:   180ms;   /* small surfaces: the menu, tiles appearing */
+  --dur-surface: 220ms;   /* dialogs, and photographs arriving */
+}

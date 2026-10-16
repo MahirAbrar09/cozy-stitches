@@ -1,0 +1,550 @@
+/* ==========================================================================
+   Cozy Stitches — layout: shell, header, footer, sections, grids
+   ========================================================================== */
+
+/* --- shell -------------------------------------------------------------- */
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* --- skip link target --------------------------------------------------- */
+main { display: block; }
+
+/* --- header ------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(235, 232, 228, 0.92);
+  -webkit-backdrop-filter: saturate(150%) blur(10px);
+  backdrop-filter: saturate(150%) blur(10px);
+  border-bottom: var(--edge-line);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  min-height: 4.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  color: var(--ink);
+  text-decoration: none;
+  flex: none;
+}
+
+.brand__mark {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.05;
+}
+
+/* --- navigation --------------------------------------------------------- */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+}
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__item { margin: 0; }
+
+.site-nav__link {
+  display: inline-block;
+  padding-block: var(--s-2);
+  border-bottom: 2px solid transparent;
+  color: var(--ink);
+  font-size: var(--step-0);
+  text-decoration: none;
+  transition: border-color 160ms var(--ease), color 160ms var(--ease);
+}
+
+.site-nav__link:hover { border-bottom-color: var(--sky); }
+
+.site-nav__link[aria-current="page"] {
+  border-bottom-color: var(--thread);
+  font-weight: 600;
+}
+
+/* --- mobile navigation -------------------------------------------------- */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  border: 1px solid var(--edge-strong);
+  border-radius: var(--radius);
+  background-color: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 160ms var(--ease),
+              transform var(--dur-press) var(--ease);
+}
+
+.nav-toggle__bars {
+  position: relative;
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  background-color: var(--ink);
+}
+
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--ink);
+}
+
+.nav-toggle__bars::before { top: -5px; }
+.nav-toggle__bars::after  { top: 5px; }
+
+@media (max-width: 53.99rem) {
+  .nav-toggle { display: inline-flex; }
+
+  .site-nav {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-4);
+    padding: var(--s-5) var(--gutter) var(--s-6);
+    background-color: var(--linen);
+    border-bottom: var(--edge-line);
+    box-shadow: var(--shadow);
+  }
+
+  /* Without JavaScript the nav stays open and usable as a stacked list. */
+  .js .site-nav:not([data-open="true"]) { display: none; }
+
+  /* Entrance only. Closing a menu is almost always immediately followed by
+     navigation, so an exit animation would be movement nobody ever sees — and
+     the menu is only a few taps a session, so one we do see should feel
+     deliberate rather than abrupt. */
+  .js .site-nav[data-open="true"] {
+    animation: nav-drop var(--dur-quick) var(--ease) both;
+  }
+
+  .site-nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .site-nav__link {
+    display: block;
+    padding-block: var(--s-3);
+    border-bottom: var(--edge-line);
+  }
+
+  .site-nav__link[aria-current="page"] { border-bottom-color: var(--thread); }
+}
+
+/* --- sections ----------------------------------------------------------- */
+.section {
+  padding-block: clamp(3rem, 7.5vw, 6rem);
+}
+
+.section--tight { padding-block: clamp(2rem, 4.5vw, 3.5rem); }
+
+.section--sky { background-color: var(--sky-wash); }
+
+.section--dark {
+  background-color: var(--ink);
+  color: var(--on-dark);
+}
+
+.section--dark a { color: var(--on-dark); }
+
+.section--dark .muted { color: var(--on-dark-muted); }
+
+.section__head {
+  display: grid;
+  gap: var(--s-4);
+  margin-bottom: var(--s-7);
+}
+
+.section__head--split {
+  gap: var(--s-5);
+}
+
+@media (min-width: 52rem) {
+  .section__head--split {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: end;
+    gap: var(--s-7);
+  }
+}
+
+/* In the dark call-to-action bands the heading is a single line, so centring
+   it against the taller copy column reads better than bottom-aligning it. */
+.section--dark .section__head--split { align-items: center; }
+
+.section__title-note {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+/* --- hero --------------------------------------------------------------- */
+.hero { padding-block: clamp(2rem, 5vw, 3.5rem) clamp(2.5rem, 6vw, 5rem); }
+
+.hero__grid {
+  display: grid;
+  gap: var(--s-7);
+  align-items: center;
+}
+
+@media (min-width: 60rem) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.18fr);
+    gap: var(--s-8);
+  }
+}
+
+.hero__text { max-width: 34rem; }
+
+.hero__title { margin-bottom: var(--s-5); }
+
+.hero__lede { margin-bottom: var(--s-6); }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: center;
+}
+
+/* The media frame carries the animated stitch. Aspect ratio is fixed so the
+   SVG overlay maps 1:1 onto the photograph with no dash distortion. */
+.hero__media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  background-color: var(--sky-wash);
+  border: var(--edge-line);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Direct child only. The logo plate and the placeholder emblem are both <img>
+   nested one level deeper inside the frame and must keep their own size.
+   Note: never pair a min-height with this aspect-ratio — the ratio would then
+   widen the frame to satisfy the height. */
+.hero__media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stitch-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--stitch-width);
+  color: var(--thread);
+  overflow: visible;
+}
+
+.hero__media .stitch-line { bottom: 0; }
+
+/* A single orchestrated page-load moment: thread laying itself down. */
+.js .stitch-line--draw { animation: stitch-draw 1.2s var(--ease) 140ms both; }
+
+@keyframes stitch-draw {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+.hero__figure {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+}
+
+.hero__caption,
+.hero__meta {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  max-width: 46ch;
+}
+
+/* --- mosaic (featured work: deliberately uneven) ------------------------ */
+.mosaic {
+  display: grid;
+  gap: var(--s-5) var(--s-4);
+  grid-template-columns: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .mosaic { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 62rem) {
+  /* Two tiles per row, wide and narrow alternating: 2+4, 4+2, 2+4. The six
+     featured pieces therefore fill three complete rows with no gap left over.
+     Spans are the only source of unevenness; the media stay proportional. */
+  .mosaic { grid-template-columns: repeat(6, 1fr); }
+
+  .mosaic > :nth-child(6n + 1) { grid-column: span 2; }
+  .mosaic > :nth-child(6n + 2) { grid-column: span 4; }
+  .mosaic > :nth-child(6n + 3) { grid-column: span 4; }
+  .mosaic > :nth-child(6n + 4) { grid-column: span 2; }
+  .mosaic > :nth-child(6n + 5) { grid-column: span 2; }
+  .mosaic > :nth-child(6n)     { grid-column: span 4; }
+
+  .mosaic > :nth-child(6n + 2) .tile__media,
+  .mosaic > :nth-child(6n + 3) .tile__media,
+  .mosaic > :nth-child(6n) .tile__media { aspect-ratio: 16 / 11; }
+}
+
+/* --- product grid (uniform: filtering must not shift positions) --------- */
+.product-grid {
+  display: grid;
+  gap: var(--s-6) var(--s-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-grid > li { margin: 0; }
+
+/* --- category row ------------------------------------------------------- */
+.categories {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.categories > li { margin: 0; }
+
+/* --- two-column split (about, contact) --------------------------------- */
+.split {
+  display: grid;
+  gap: var(--s-6);
+}
+
+@media (min-width: 56rem) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: var(--s-8);
+    align-items: start;
+  }
+
+  .split__aside { position: sticky; top: 6rem; }
+}
+
+/* --- process strip (genuinely a sequence, so numbering is warranted) ---- */
+.process {
+  display: grid;
+  gap: var(--s-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+@media (min-width: 48rem) {
+  .process { grid-template-columns: repeat(3, 1fr); gap: var(--s-7); }
+}
+
+.process > li {
+  margin: 0;
+  padding-top: var(--s-4);
+  border-top: 2px dashed var(--sky);
+}
+
+.process__step {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--thread-ink);
+}
+
+.process__title { margin-bottom: var(--s-2); }
+
+/* --- filter bar --------------------------------------------------------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  align-items: center;
+  margin-bottom: var(--s-6);
+  padding-bottom: var(--s-5);
+  border-bottom: var(--edge-line);
+}
+
+.filter-bar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.filter-bar__count {
+  margin-left: auto;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+/* --- empty state -------------------------------------------------------- */
+.empty-state {
+  padding: var(--s-8) var(--s-5);
+  border: 2px dashed var(--sky);
+  text-align: center;
+  background-color: var(--sky-wash);
+}
+
+/* --- footer ------------------------------------------------------------- */
+.site-footer {
+  margin-top: var(--s-9);
+  padding-block: var(--s-8) var(--s-6);
+  background-color: var(--ink);
+  color: var(--on-dark);
+  font-size: var(--step--1);
+}
+
+.site-footer a {
+  color: var(--on-dark);
+  text-decoration-thickness: 1px;
+}
+
+.site-footer__grid {
+  display: grid;
+  gap: var(--s-6);
+}
+
+@media (min-width: 48rem) {
+  .site-footer__grid {
+    grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+    gap: var(--s-7);
+  }
+}
+
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+}
+
+.site-footer__heading {
+  margin-bottom: var(--s-4);
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.site-footer__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__list > li { margin-bottom: var(--s-3); }
+
+/* Footer channel links: on the dark ground, so no light card treatment. */
+.site-footer__channel {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+}
+
+.site-footer__channel:hover .site-footer__channel-label {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.site-footer__channel-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  color: var(--on-dark);
+}
+
+.site-footer__channel-label {
+  display: block;
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.site-footer__channel-handle {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--on-dark-muted);
+}
+
+/* --text-muted is tuned for the linen ground and fails on the ink footer. */
+.site-footer .muted { color: var(--on-dark-muted); }
+
+.site-footer__colophon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-5);
+  justify-content: space-between;
+  margin-top: var(--s-8);
+  padding-top: var(--s-5);
+  border-top: 1px solid rgba(244, 242, 239, 0.22);
+  color: var(--on-dark-muted);
+}
+
+/* --- page header (inner pages) ----------------------------------------- */
+.page-head {
+  padding-block: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 2.5vw, 2rem);
+}
+
+/* --- keyframes ---------------------------------------------------------- */
+@keyframes nav-drop {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.page-head__title { margin-bottom: var(--s-4); }
+
+/* --- prose column ------------------------------------------------------- */
+.prose > h2 { margin-top: var(--s-7); margin-bottom: var(--s-4); }
+.prose > h2:first-child { margin-top: 0; }
+.prose > h3 { margin-top: var(--s-6); margin-bottom: var(--s-3); }

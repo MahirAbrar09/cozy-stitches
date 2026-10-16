@@ -1,0 +1,20 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
+
+# Local preview artefacts
+tools/__pycache__/
+*.pyc
+
+# The admin panel's own undo history. Genuinely useful on this machine, but it
+# is not part of the website and would grow every deploy.
+tools/admin/backups/
+
+# Node, if a tool ever needs a package
+node_modules/

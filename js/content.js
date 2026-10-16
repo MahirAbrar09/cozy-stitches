@@ -1,0 +1,401 @@
+/* ==========================================================================
+   Cozy Stitches — site content (GENERATED FILE — DO NOT EDIT)
+   --------------------------------------------------------------------------
+   This file is written by tools/build-content.mjs out of js/content.json.
+   Any edit made here is overwritten the next time you save in the admin panel
+   or run `npm run build`.
+
+   To change anything, run the admin panel:
+
+       npm run admin
+
+   and edit js/content.json directly if you prefer — but the admin is easier
+   and it checks your work before saving.
+   ========================================================================== */
+
+window.COZY = {
+  "brand": {
+    "name": "Cozy Stitches",
+    "tagline": "Love is the thread with which we connect to the world.",
+    "subline": "Hand-embroidered pieces, made slowly with love.",
+    "location": "Bangladesh",
+    "category": "Artist"
+  },
+  "channels": {
+    "messenger": "cozy.stitches07",
+    "whatsapp": "",
+    "instagram": "cozy_stitches007",
+    "email": ""
+  },
+  "order": {
+    "priority": [
+      "messenger",
+      "whatsapp",
+      "instagram",
+      "email"
+    ],
+    "genericMessage": "Hi Cozy Stitches! I'd like to ask about ordering.",
+    "messengerPrefillText": false,
+    "messageTemplate": "Hi Cozy Stitches! I'd like to order \"{name}\" (ref {code}). Is it available?"
+  },
+  "categories": [
+    {
+      "id": "bags",
+      "label": "Hand embroidered bags",
+      "note": "Totes and crossbodies"
+    },
+    {
+      "id": "pouches",
+      "label": "Zip pouches",
+      "note": "Lined, with a tassel pull"
+    },
+    {
+      "id": "bangles",
+      "label": "Bangles & bracelets",
+      "note": "Thread-wrapped and hand-stitched"
+    },
+    {
+      "id": "earrings",
+      "label": "Earrings",
+      "note": "Light enough to forget"
+    },
+    {
+      "id": "accessories",
+      "label": "Accessories",
+      "note": "Small things, stitched"
+    }
+  ],
+  "products": [
+    {
+      "slug": "bow-garden-tote",
+      "name": "Bow Garden Tote",
+      "category": "bags",
+      "code": "CS-BAG-01",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": true,
+      "blurb": "White cotton tote scattered with hand-stitched bows in wine, rose and blush.",
+      "description": "A roomy everyday tote in sturdy white cotton, worked with dozens of small satin-stitch bows. Each bow is sewn by hand, so the spacing and the tilt of the petals shift a little from one tote to the next. Lined in plain cotton, with a slip pocket inside for a phone.",
+      "materials": "Handloom cotton outer, cotton lining, cotton embroidery thread",
+      "care": "Spot clean by hand in cool water. Dry flat in shade. Warm iron on the reverse, keeping the iron off the embroidery.",
+      "images": [],
+      "alt": "White hand-embroidered tote bag carried over a maroon kurta"
+    },
+    {
+      "slug": "midnight-floral-crossbody",
+      "name": "Midnight Floral Crossbody",
+      "category": "bags",
+      "code": "CS-BAG-02",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": true,
+      "blurb": "Black canvas crossbody with a loose wildflower spray in moss, marigold and rose.",
+      "description": "A compact crossbody in black cotton canvas, carrying an open spray of daisies, fern leaves and small buds worked in moss, marigold and rose. Large enough for a phone, a purse and keys. The strap adjusts for shoulder or cross-body wear.",
+      "materials": "Cotton canvas, cotton embroidery thread, metal zip and slider",
+      "care": "Hand wash separately in cool water if needed. Dry flat in shade. Do not wring the embroidery.",
+      "images": [],
+      "alt": "Black hand-embroidered crossbody bag with a wildflower spray"
+    },
+    {
+      "slug": "denim-bloom-crossbody",
+      "name": "Denim Bloom Crossbody",
+      "category": "bags",
+      "code": "CS-BAG-03",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": false,
+      "blurb": "Reclaimed denim with a folk floral spray in bright thread.",
+      "description": "Made from reclaimed denim, with a folk-style floral spray stitched along one side in bright cotton thread. Because the denim is reclaimed, the wash, the weight and the exact shade vary between pieces — no two are quite the same.",
+      "materials": "Reclaimed denim, cotton embroidery thread",
+      "care": "Hand wash cold, inside out. Line dry. Wash alone for the first few washes.",
+      "images": [],
+      "alt": "Denim crossbody bag with embroidered folk flowers"
+    },
+    {
+      "slug": "lavender-sprig-pouch",
+      "name": "Lavender Sprig Pouch",
+      "category": "pouches",
+      "code": "CS-PCH-01",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": true,
+      "blurb": "Black zip pouch with a single lavender sprig and a tassel pull.",
+      "description": "A flat, lined pouch in black cotton with one lavender sprig stitched across the front and a small tassel on the zip. Sized for a phone, cards and a lipstick, or for pens and a passport.",
+      "materials": "Cotton canvas, cotton lining, cotton embroidery thread, metal zip",
+      "care": "Spot clean or hand wash cool. Dry flat in shade.",
+      "images": [],
+      "alt": "Black zip pouch embroidered with a purple lavender sprig"
+    },
+    {
+      "slug": "jamdani-star-pouch",
+      "name": "Jamdani Star Pouch",
+      "category": "pouches",
+      "code": "CS-PCH-02",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": false,
+      "blurb": "Indigo pouch with jamdani-inspired stars, and a name stitched across the front on request.",
+      "description": "An indigo pouch patterned with jamdani-inspired stars and small leaves. On request we stitch a name across the front in the same thread — send us the spelling when you order and we'll show you the layout before we sew.",
+      "materials": "Cotton canvas, cotton embroidery thread, tassel",
+      "care": "Hand wash cool. Dry flat in shade.",
+      "images": [],
+      "alt": "Indigo embroidered pouch with stars and a name stitched on the front"
+    },
+    {
+      "slug": "marigold-field-pouch",
+      "name": "Marigold Field Pouch",
+      "category": "pouches",
+      "code": "CS-PCH-03",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": true,
+      "blurb": "Olive cotton pouch with marigold and fern.",
+      "description": "Olive cotton with a small stand of marigold and fern stitched in warm oranges and greens. Fully lined, with a metal zip.",
+      "materials": "Cotton canvas, cotton lining, cotton embroidery thread, metal zip",
+      "care": "Hand wash cool. Dry flat in shade.",
+      "images": [],
+      "alt": "Olive fabric pouch embroidered with marigold flowers"
+    },
+    {
+      "slug": "daisy-cluster-pouch",
+      "name": "Daisy Cluster Pouch",
+      "category": "pouches",
+      "code": "CS-PCH-04",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": false,
+      "blurb": "Black pouch with a cluster of white daisies and golden centres.",
+      "description": "White daisies with golden centres, gathered into a loose cluster on black cotton. Lined, with a metal zip and a beaded pull.",
+      "materials": "Cotton canvas, cotton lining, cotton embroidery thread, glass beads",
+      "care": "Hand wash cool, taking care around the beaded pull. Dry flat in shade.",
+      "images": [],
+      "alt": "Black pouch with a cluster of embroidered white daisies"
+    },
+    {
+      "slug": "heart-charm-bracelet",
+      "name": "Heart Charm Bracelet",
+      "category": "bangles",
+      "code": "CS-BRC-01",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": true,
+      "blurb": "Pink heart-shaped charm on a chain, with a small embroidered flower at the centre.",
+      "description": "A pink heart charm on a fine chain, with a tiny embroidered flower and the words Cozy Stitches worked into it. Light enough to wear every day.",
+      "materials": "Cotton thread, felt, metal chain and clasp",
+      "care": "Keep dry. Store flat so the chain does not kink.",
+      "images": [],
+      "alt": "Pink embroidered heart charm bracelet on a chain"
+    },
+    {
+      "slug": "floral-bangle-set",
+      "name": "Floral Bangle Set",
+      "category": "bangles",
+      "code": "CS-BNG-01",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": true,
+      "blurb": "কাঁচ wrapped in thread with small pink and green flowers.",
+      "description": "Bangles wrapped in cotton thread, with small pink and green flowers stitched along the band. Sold as a set; tell us your size when you order and we'll match the diameter before we start.",
+      "materials": "Thread-wrapped bangle, cotton embroidery thread",
+      "care": "Keep away from water and perfume so the thread keeps its colour.",
+      "images": [],
+      "alt": "Thread-wrapped bangles embroidered with pink flowers"
+    },
+    {
+      "slug": "thread-petal-earrings",
+      "name": "Thread Petal Earrings",
+      "category": "earrings",
+      "code": "CS-EAR-01",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": false,
+      "blurb": "Embroidered petal studs in deep green and violet.",
+      "description": "Embroidered petal studs, worked in deep green and violet so the colour shifts as they catch the light. Very light — a few grams each.",
+      "materials": "Cotton thread, felt backing, hypoallergenic posts",
+      "care": "Wipe the posts with a dry cloth. Keep the embroidery away from perfume and hairspray.",
+      "images": [],
+      "alt": "Embroidered petal earrings in green and violet"
+    },
+    {
+      "slug": "fern-bookmark",
+      "name": "Fern Bookmark",
+      "category": "accessories",
+      "code": "CS-ACC-01",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": true,
+      "blurb": "A single fern frond stitched along a slim cotton bookmark.",
+      "description": "One fern frond stitched the length of a slim cotton bookmark, finished at the end with a small thread tassel. Thin enough that it will not strain a spine.",
+      "materials": "Cotton fabric, cotton embroidery thread",
+      "care": "Hand wash cool if needed. Dry flat.",
+      "images": [],
+      "alt": "Cotton bookmark embroidered with a green fern frond"
+    },
+    {
+      "slug": "needle-and-thread-keyring",
+      "name": "Needle & Thread Keyring",
+      "category": "accessories",
+      "code": "CS-ACC-02",
+      "price": null,
+      "priceNote": "DM for price",
+      "featured": false,
+      "blurb": "A small embroidered needle-and-thread charm on a metal ring.",
+      "description": "A small embroidered needle and thread of your own colour, mounted on a metal ring. A quiet gift for someone who sews.",
+      "materials": "Cotton thread, felt, metal keyring",
+      "care": "Keep dry.",
+      "images": [],
+      "alt": "Embroidered needle and thread keyring charm"
+    }
+  ],
+  "home": {
+    "heroPlaceholder": "Photograph coming soon — this frame is sized for a 3:2 product shot.",
+    "heroPhoto": null,
+    "heroCaption": "Bow Garden Tote, embroidered in cotton thread.",
+    "heroHeading": "Hand embroidery, stitched slowly in Bangladesh.",
+    "heroLede": "Every piece is made once, by hand, to order. Nothing is woven twice the same way — which is the whole point.",
+    "categoriesHeading": "What we make",
+    "featuredHeading": "Recently finished",
+    "featuredNote": "A few pieces from the worktable.",
+    "processHeading": "How an order goes",
+    "ctaHeading": "Tell us what you have in mind.",
+    "ctaBody": "Send a message with the piece you like, or describe something new. We'll answer with the price, the timing and a photo of the thread."
+  },
+  "process": [
+    {
+      "title": "Pick your piece",
+      "body": "Choose something from the shop, or send us a design you have in mind — a name, a flower, a colour you like."
+    },
+    {
+      "title": "We stitch it",
+      "body": "Most pieces are made to order. Small things take a few days; a custom bag takes longer. You'll see it before it is posted."
+    },
+    {
+      "title": "It comes to you",
+      "body": "We agree the price and the delivery over Messenger, then send it by courier."
+    }
+  ],
+  "about": {
+    "heading": "A small studio, a lot of thread.",
+    "lead": "Cozy Stitches began with a needle, a box of coloured thread and a habit of stitching in the evenings. It is still one person at a table, working slowly, on purpose.",
+    "body": [
+      "Most of what you see here is made after you ask for it. That means the piece you receive was not sitting in a stack waiting — it was cut, lined, embroidered and finished for you, which is why the small things take a few days rather than a few hours.",
+      "The thread does the talking. Bows in wine and rose on white cotton, lavender and marigold on black canvas, jamdani stars on indigo. Where a design allows it, we stitch a name or a date into the piece so it belongs to one person only.",
+      "Nothing here is machine-embroidered and nothing is mass-produced. Where two pieces are meant to match, they never match exactly. That is the honest signature of handwork, not a fault."
+    ],
+    "materials": {
+      "heading": "Materials",
+      "items": [
+        {
+          "key": "Fabric",
+          "value": "Handloom cotton, cotton canvas, reclaimed denim, felt"
+        },
+        {
+          "key": "Thread",
+          "value": "Cotton embroidery thread, mostly Anchor and DMC"
+        },
+        {
+          "key": "Hardware",
+          "value": "Metal zips, sliders and tassel pulls"
+        },
+        {
+          "key": "Made in",
+          "value": "Bangladesh, by hand, in small batches"
+        }
+      ]
+    },
+    "care": {
+      "heading": "Looking after it",
+      "items": [
+        "Hand wash in cool water with a mild soap. Never bleach.",
+        "Do not wring or scrub the embroidery. Press the water out flat between two towels.",
+        "Dry in the shade, flat, so the colour holds.",
+        "Iron on the reverse, warm, working around the stitching rather than over it.",
+        "Keep bangles and earrings away from perfume, hairspray and long soaking."
+      ]
+    },
+    "markHeading": "The mark",
+    "markBody": "The emblem is drawn in the same terms as the work itself. Half the heart is running stitch and half is one unbroken line; a threaded needle runs through the middle; a pair of scissors sits below it, and under that, a row of zigzag stitching. The name is above all of it, and the two materials are below.",
+    "reviewsHeading": "What people have said",
+    "reviews": [
+      {
+        "quote": "Absolutely beautiful — delicately accurate. This is always what I wanted. Thank you so much for such genuine and intricate work.",
+        "author": "Verified buyer",
+        "source": "Facebook review"
+      },
+      {
+        "quote": "It's exactly the same thing I asked for. I'm so satisfied.",
+        "author": "Verified buyer",
+        "source": "Facebook review"
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Ordering, delivery and payment.",
+    "lead": "The quickest way is a message. Tell us the piece, and we'll reply with the price, the timing and the delivery charge for your area.",
+    "shipping": {
+      "heading": "Delivery",
+      "items": [
+        "Inside Dhaka and outside Dhaka are both sent by courier.",
+        "Message us your full address and we will confirm the exact charge before anything is paid.",
+        "Made-to-order pieces are posted once they are finished, not before.",
+        "International delivery is possible — ask us for a rate before you order."
+      ]
+    },
+    "payments": {
+      "heading": "Payment",
+      "items": [
+        "Payment is arranged over Messenger, before posting.",
+        "Mobile financial services and bank transfer are both usual.",
+        "Ask about cash on delivery inside Dhaka.",
+        "You will always be told the full amount — item plus delivery — before you pay."
+      ]
+    },
+    "custom": {
+      "heading": "Custom work",
+      "body": "Most of what we make can be changed: the colour of the thread, the flower, the size, a name stitched into the piece. Send a photo of what you have in mind and we'll tell you what it costs and how long it takes. A custom bag usually takes longer than a pouch, so plan ahead if it is a gift."
+    },
+    "faq": [
+      {
+        "q": "How do I actually place an order?",
+        "a": "Pick a piece in the shop and tap an order button. A message opens with the item and its reference code already in it. Send that, and we'll confirm the price and the delivery charge."
+      },
+      {
+        "q": "Why is there no price on the site?",
+        "a": "Because most pieces are made to order and the thread and size change the cost. Ask for any item and you'll have a firm price straight away."
+      },
+      {
+        "q": "How long will it take?",
+        "a": "A pouch or a bookmark is usually a few days. A bag, or anything with a name stitched into it, takes longer. We'll give you a date when you order and tell you if it slips."
+      },
+      {
+        "q": "Can I get a name or a date stitched in?",
+        "a": "Yes, on most pieces. Send the exact spelling when you order — we'll show you the layout before we sew it."
+      },
+      {
+        "q": "What if I don't like it when it arrives?",
+        "a": "Tell us. Made-to-order and personalised pieces can't be resold, so they can't be returned, but if something is wrong with the workmanship we will put it right."
+      },
+      {
+        "q": "Do you take bulk or wholesale orders?",
+        "a": "For weddings, gifting and small shops, yes. Message us with the quantity, the design and the date you need it and we'll quote for it."
+      }
+    ]
+  },
+  "footer": {
+    "note": "Hand-embroidered in Bangladesh. Made to order, in small batches.",
+    "links": [
+      {
+        "label": "Shop",
+        "href": "./shop.html"
+      },
+      {
+        "label": "About",
+        "href": "./about.html"
+      },
+      {
+        "label": "Contact",
+        "href": "./contact.html"
+      }
+    ]
+  }
+};

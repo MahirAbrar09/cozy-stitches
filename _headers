@@ -1,0 +1,26 @@
+# Cozy Stitches — hosting headers
+#
+# NOTE: this file is read by Netlify and Cloudflare Pages. GitHub Pages ignores
+# it, and there it is simply an unused text file.
+#
+# Cache lifetimes are deliberately short for CSS and JS: the site is edited by
+# hand and has no build step to produce fingerprinted filenames, so a long
+# cache would hide your edits from returning visitors.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+/css/*
+  Cache-Control: public, max-age=600, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=600, must-revalidate
+
+/assets/img/*
+  Cache-Control: public, max-age=604800
+
+/*.html
+  Cache-Control: public, max-age=600, must-revalidate

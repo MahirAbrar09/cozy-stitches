@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Shop — hand-embroidered bags, pouches and bangles | Cozy Stitches</title>
+<meta name="description" content="Browse hand-embroidered bags, zip pouches, bangles, earrings and accessories. Each piece is stitched to order in Bangladesh. Message us for the price.">
+<meta name="theme-color" content="#ebe8e4">
+
+<!-- Add these once the site has a domain:
+<link rel="canonical" href="https://your-domain.com/shop.html">
+<meta property="og:url" content="https://your-domain.com/shop.html">
+-->
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cozy Stitches">
+<meta property="og:title" content="Shop — hand-embroidered bags, pouches and bangles">
+<meta property="og:description" content="Browse hand-embroidered bags, zip pouches, bangles, earrings and accessories. Each piece is stitched to order.">
+<meta property="og:image" content="./assets/img/brand/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shop — hand-embroidered bags, pouches and bangles">
+<meta name="twitter:description" content="Each piece is stitched to order. Message us for the price.">
+<meta name="twitter:image" content="./assets/img/brand/og-image.png">
+
+<link rel="icon" href="./assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="./assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="./assets/img/brand/apple-touch-icon.png">
+<link rel="manifest" href="./site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;600&display=swap">
+
+<link rel="stylesheet" href="./css/tokens.css">
+<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/layout.css">
+<link rel="stylesheet" href="./css/components.css">
+
+<script>document.documentElement.classList.add("js");</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home" },
+    { "@type": "ListItem", "position": 2, "name": "Shop" }
+  ]
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a class="brand" href="./index.html">
+      <img class="brand__mark" src="./assets/img/brand/mark.svg" alt="" width="40" height="40" decoding="async">
+      <span class="brand__name" data-render="brand">Cozy Stitches</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+      <span>Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary" data-open="false">
+      <ul class="site-nav__list">
+        <li class="site-nav__item"><a class="site-nav__link" href="./index.html">Home</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="./shop.html" aria-current="page">Shop</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="./about.html">About</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="./contact.html">Contact</a></li>
+      </ul>
+      <a class="btn btn--primary btn--sm" href="./contact.html" data-render="order-cta">Message us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="page-head">
+    <div class="shell">
+      <h1 class="page-head__title">Hand-embroidered pieces, made to order</h1>
+      <p class="lede">Everything here is stitched by hand after you ask for it. Pick a piece to see the detail, then send us a message — we'll reply with the price and the delivery charge for your area.</p>
+      <div class="actions" data-render="channel-actions"></div>
+    </div>
+  </div>
+
+  <section class="section section--tight" aria-labelledby="catalog-heading" data-anchor="catalog">
+    <div class="shell">
+      <h2 class="visually-hidden" id="catalog-heading">Catalog</h2>
+
+      <div class="filter-bar">
+        <div class="filter-bar__chips" data-render="filters"></div>
+        <p class="filter-bar__count" data-render="count" aria-live="polite"></p>
+      </div>
+
+      <ul class="product-grid" data-render="products"></ul>
+
+      <div class="empty-state" data-render="empty" hidden>
+        <p>Nothing in this category yet.</p>
+        <p><a class="btn btn--primary" href="./contact.html">Ask us about a custom piece</a></p>
+      </div>
+
+      <noscript>
+        <p class="notice">This catalog is built with JavaScript, so the products can't load here. Message us on
+          <a href="https://www.facebook.com/cozy.stitches07">Facebook</a> and we'll send photographs and prices straight away.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <section class="section section--dark" aria-labelledby="shop-cta-heading">
+    <div class="shell">
+      <div class="section__head section__head--split">
+        <h2 id="shop-cta-heading">Nothing here quite right?</h2>
+        <div>
+          <p>Most designs can be changed — the thread colour, the flower, the size, a name stitched into the piece. Describe it and we'll tell you what it costs.</p>
+          <div class="actions" data-render="channel-actions"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__grid">
+      <div>
+        <p class="site-footer__brand">
+          <img src="./assets/img/brand/mark.svg" alt="" width="32" height="32" decoding="async">
+          <span data-render="brand">Cozy Stitches</span>
+        </p>
+        <p class="muted" data-render="footer-note">Hand-embroidered in Bangladesh. Made to order, in small batches.</p>
+        <p class="muted" data-render="tagline">Love is the thread with which we connect to the world.</p>
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Pages</h2>
+        <ul class="site-footer__list" data-render="footer-links"></ul>
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Order here</h2>
+        <ul class="site-footer__list" data-render="channels-plain"></ul>
+      </div>
+    </div>
+    <div class="site-footer__colophon">
+      <p>&copy; <span data-render="year">2026</span> Cozy Stitches. Hand-embroidered in Bangladesh.</p>
+      <p>Prices are always confirmed over message before anything is paid.</p>
+    </div>
+  </div>
+</footer>
+
+<dialog class="detail" id="detail" aria-labelledby="detail-title"></dialog>
+
+<script src="./js/content.js" defer></script>
+<script src="./js/render.js" defer></script>
+<script src="./js/site.js" defer></script>
+</body>
+</html>

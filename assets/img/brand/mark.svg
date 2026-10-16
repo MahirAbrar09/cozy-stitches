@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 50 400 400" role="img" aria-label="Cozy Stitches">
+  <title>Cozy Stitches</title>
+  <!--
+    The emblem from the master logo, alone on its badge, for the sizes where the
+    wordmark and tagline would be illegible: the site header, the footer, the
+    favicon and the app icon.
+
+    Shapes and colours are the master logo's, unchanged. Two deliberate
+    adaptations, because a faithful copy is unusable small:
+      • the wordmark, scissors, tagline and zigzag rules are omitted
+      • the emblem sits 1.7x larger and centred on the badge, and the stroke
+        weight is raised from 3 to 6. At the header's 40px the original 3
+        would render as a 0.3px hairline and disappear.
+    logo.svg remains the untouched original; compare against it.
+  -->
+  <circle cx="250" cy="250" r="200" fill="#8cb3c9"/>
+  <g transform="translate(250 250) scale(1.7) translate(0 21)"
+     stroke="#2b2353" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Heart, left half stitched -->
+    <path d="M 0,28 C -18,12 -35,-2 -48,-18 C -58,-31 -50,-52 -33,-52 C -18,-52 -5,-35 0,-20"
+          stroke-dasharray="9 9"/>
+    <!-- Heart, right half solid -->
+    <path d="M 0,28 C 18,12 35,-2 48,-18 C 58,-31 50,-52 33,-52 C 18,-52 5,-35 0,-20"/>
+    <!-- Looping thread -->
+    <path d="M 3,-38 C -12,-58 -2,-70 8,-62 C 15,-56 2,-42 -8,-48 C -14,-51 -12,-58 -3,-56"
+          stroke-width="5"/>
+    <!-- Needle -->
+    <path d="M 2.5,-42 L 2.5,25 L 0,28 L -2.5,25 L -2.5,-42 Z" fill="#2b2353"/>
+    <ellipse cx="0" cy="-35" rx="1" ry="4" fill="#8cb3c9" stroke="none"/>
+  </g>
+</svg>

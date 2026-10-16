@@ -1,0 +1,16 @@
+{
+  "name": "cozy-stitches",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Cozy Stitches website, and a local editor for its content.",
+  "scripts": {
+    "admin": "node tools/admin/server.mjs",
+    "build": "node tools/build-content.mjs",
+    "doctor": "node tools/admin/doctor.mjs",
+    "assets": "node tools/make-brand-assets.mjs",
+    "verify": "node tools/verify.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

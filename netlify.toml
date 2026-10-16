@@ -1,0 +1,15 @@
+# Cozy Stitches — hosting configuration for Netlify and Cloudflare Pages.
+#
+# The site has no build step of its own, but the content file is generated from
+# js/content.json. Running the generator here means the published content can
+# never drift from the data file, even if a deploy is triggered from GitHub
+# without the admin panel ever being opened.
+#
+# The build command uses node directly rather than `npm run`, so npm is not
+# involved in a deploy at all. Security and caching headers live in `_headers`,
+# which both Netlify and Cloudflare Pages read; there is no second copy of them
+# here to fall out of step.
+
+[build]
+  command = "node tools/build-content.mjs"
+  publish = "."

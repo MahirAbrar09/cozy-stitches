@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cozy Stitches — admin</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<a class="skip-link" href="#view">Skip to the editor</a>
+
+<header class="bar">
+  <div class="bar__left">
+    <img class="bar__mark" src="/assets/img/brand/mark.svg" alt="" width="32" height="32">
+    <span class="bar__title">Cozy Stitches</span>
+    <span class="bar__state" id="save-state" aria-live="polite">Loading…</span>
+  </div>
+  <div class="bar__right">
+    <a class="btn btn--ghost" href="/" target="_blank" rel="noopener">Open site</a>
+    <button class="btn btn--ghost" type="button" id="history">History</button>
+    <button class="btn" type="button" id="publish">Publish</button>
+    <button class="btn btn--primary" type="button" id="save">Save</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs" aria-label="Sections"></nav>
+
+<main id="view" class="view"></main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog class="panel" id="panel" aria-labelledby="panel-title">
+  <div class="panel__head">
+    <h2 id="panel-title">Publish</h2>
+    <button class="panel__close" type="button" id="panel-close" aria-label="Close">✕</button>
+  </div>
+  <div class="panel__body" id="panel-body"></div>
+</dialog>
+
+<script type="module" src="/admin/js/admin.js"></script>
+</body>
+</html>
