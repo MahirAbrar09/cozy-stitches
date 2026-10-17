@@ -77,6 +77,30 @@ if (!BASE) {
   BASE = "http://127.0.0.1:" + siteServer.address().port;
 }
 
+/* --------------------------------------------------------------------------
+   Expectations derived from the content file.
+
+   These numbers used to be hardcoded — 12 products, 4 pouches, 6 FAQ entries.
+   That meant the suite failed on CORRECT edits: the moment the owner added a
+   product or deleted a question, a green suite turned red and stopped being
+   worth trusting. Deriving them lets the checks assert the thing they were
+   always trying to say: everything in the content file is actually rendered.
+   -------------------------------------------------------------------------- */
+const CONTENT = JSON.parse(fs.readFileSync(path.join(PROJECT, "js", "content.json"), "utf8"));
+const PRODUCTS = CONTENT.products || [];
+const CATEGORIES = CONTENT.categories || [];
+const countsIn = (id) => PRODUCTS.filter((product) => product.category === id).length;
+
+/* renderFeatured shows up to six featured products, or the first six if none
+   are marked. */
+const FEATURED_COUNT = Math.min(6, PRODUCTS.filter((product) => product.featured).length || PRODUCTS.length);
+
+const SAMPLE = PRODUCTS[0];
+const FILTER = CATEGORIES.find((category) => countsIn(category.id) > 0) || CATEGORIES[0];
+const FILTER_COUNT = countsIn(FILTER.id);
+const OTHER = (CATEGORIES.find((category) => category.id !== FILTER.id) || FILTER).id;
+const OTHER_COUNT = countsIn(OTHER);
+
 const require = createRequire(import.meta.url);
 
 let chromium;
@@ -120,7 +144,10 @@ function watch(page) {
 
 async function load(page, url, readySelector) {
   await page.goto(url, { waitUntil: "load" });
-  if (readySelector) await page.waitForSelector(readySelector, { timeout: 10000 });
+  /* "attached", not the default "visible": a deep-linked filter hides most
+     tiles, and the first one in the DOM is often one of the hidden ones. The
+     assertions themselves decide what should be visible. */
+  if (readySelector) await page.waitForSelector(readySelector, { timeout: 10000, state: "attached" });
 }
 
 /* Walks every text-bearing element, resolves its effective background by
@@ -236,8 +263,12 @@ const browser = await chromium.launch();
 
   await load(page, BASE + "/index.html", "[data-render='categories'] > li");
 
-  check("home: 5 category cards", (await page.locator("[data-render='categories'] > li").count()) === 5);
-  check("home: 6 featured tiles", (await page.locator("[data-render='featured'] > li").count()) === 6);
+  check("home: every category gets a card",
+    (await page.locator("[data-render='categories'] > li").count()) === CATEGORIES.length,
+    String(CATEGORIES.length));
+  check("home: the featured mosaic is filled",
+    (await page.locator("[data-render='featured'] > li").count()) === FEATURED_COUNT,
+    String(FEATURED_COUNT));
   check("home: hero heading filled",
     (await page.locator("[data-render='hero-heading']").innerText()).length > 20);
   /* Until a photograph exists the hero carries the full logo, presented as a
@@ -309,11 +340,14 @@ const browser = await chromium.launch();
 
   await load(page, BASE + "/shop.html", "[data-render='products'] > li");
 
-  check("shop: 12 product tiles", (await page.locator("[data-render='products'] > li.tile").count()) === 12);
+  check("shop: every product is rendered",
+    (await page.locator("[data-render='products'] > li.tile").count()) === PRODUCTS.length,
+    String(PRODUCTS.length));
   check("shop: filter bar has All plus every category",
-    (await page.locator("[data-filter]").count()) === 6);
-  check("shop: count reads 12 pieces",
-    (await page.locator("[data-render='count']").innerText()).includes("12 pieces"));
+    (await page.locator("[data-filter]").count()) === CATEGORIES.length + 1);
+  check("shop: the count reads the whole catalogue",
+    (await page.locator("[data-render='count']").innerText()).includes(PRODUCTS.length + " pieces"),
+    await page.locator("[data-render='count']").innerText());
   check("shop: no broken images",
     await page.evaluate(() => Array.from(document.images).every((i) => i.complete && i.naturalWidth > 0)));
 
@@ -333,16 +367,17 @@ const browser = await chromium.launch();
     }));
 
   /* Filtering */
-  await page.locator("[data-filter='pouches']").click();
+  await page.locator("[data-filter='" + FILTER.id + "']").click();
   const shown = await page.locator("[data-render='products'] > li.tile:not([hidden])").count();
-  check("shop: pouches filter shows 4 tiles", shown === 4, shown);
-  check("shop: filter is reflected in the URL", page.url().includes("c=pouches"), page.url());
+  check("shop: the " + FILTER.id + " filter shows only its own pieces",
+    shown === FILTER_COUNT, shown + " shown, " + FILTER_COUNT + " expected");
+  check("shop: filter is reflected in the URL", page.url().includes("c=" + FILTER.id), page.url());
   check("shop: active chip is announced",
-    (await page.getAttribute("[data-filter='pouches']", "aria-pressed")) === "true");
+    (await page.getAttribute("[data-filter='" + FILTER.id + "']", "aria-pressed")) === "true");
   check("shop: filtered count updates",
-    (await page.locator("[data-render='count']").innerText()).includes("4 pieces"));
+    (await page.locator("[data-render='count']").innerText()).includes(FILTER_COUNT + " pieces"));
   check("shop: other chips are not pressed",
-    (await page.getAttribute("[data-filter='bags']", "aria-pressed")) === "false");
+    (await page.getAttribute("[data-filter='" + OTHER + "']", "aria-pressed")) === "false");
 
   /* Motion, part two. The entrance animation is over long before a check could
      look at it, so what is watched is the class it hangs off. */
@@ -358,7 +393,7 @@ const browser = await chromium.launch();
     }).observe(grid, { subtree: true, attributes: true, attributeFilter: ["class"] });
   });
 
-  await page.locator("[data-filter='bags']").click();
+  await page.locator("[data-filter='" + OTHER + "']").click();
   const arrived = await page.evaluate(() => window.__arrived);
   check("motion: changing category brings the new tiles in rather than teleporting them",
     arrived > 0, String(arrived));
@@ -391,29 +426,30 @@ const browser = await chromium.launch();
     }));
 
   /* A filter arriving in the URL, as a shared link would */
-  await page.goto(BASE + "/shop.html?c=bags", { waitUntil: "load" });
-  await page.waitForSelector("[data-render='products'] > li");
-  check("shop: deep-linked filter ?c=bags applies",
-    (await page.locator("[data-render='products'] > li.tile:not([hidden])").count()) === 3);
+  await page.goto(BASE + "/shop.html?c=" + OTHER, { waitUntil: "load" });
+  await page.waitForSelector("[data-render='products'] > li", { state: "attached" });
+  check("shop: a deep-linked filter applies",
+    (await page.locator("[data-render='products'] > li.tile:not([hidden])").count()) === OTHER_COUNT,
+    OTHER_COUNT + " expected for " + OTHER);
   check("shop: deep-linked filter marks its chip",
-    (await page.getAttribute("[data-filter='bags']", "aria-pressed")) === "true");
+    (await page.getAttribute("[data-filter='" + OTHER + "']", "aria-pressed")) === "true");
 
   await page.goto(BASE + "/shop.html", { waitUntil: "load" });
-  await page.waitForSelector("[data-render='products'] > li");
+  await page.waitForSelector("[data-render='products'] > li", { state: "attached" });
 
-  /* Detail dialog */
-  await page.locator("[data-detail='lavender-sprig-pouch']").click();
+  /* Detail dialog, on whichever product happens to be first */
+  await page.locator("[data-detail='" + SAMPLE.slug + "']").click();
   await page.waitForFunction(() => document.getElementById("detail").open);
   check("shop: dialog opens", await page.evaluate(() => document.getElementById("detail").open));
-  check("shop: dialog is deep-linkable", page.url().endsWith("#lavender-sprig-pouch"), page.url());
+  check("shop: dialog is deep-linkable", page.url().endsWith("#" + SAMPLE.slug), page.url());
   check("shop: dialog shows the product name",
-    (await page.locator("#detail-title").innerText()).includes("Lavender Sprig"));
+    (await page.locator("#detail-title").innerText()).includes(SAMPLE.name), SAMPLE.name);
 
   const hrefs = await page.locator("#detail [data-channel]").evaluateAll((nodes) =>
     nodes.map((n) => n.getAttribute("href")));
   check("shop: dialog builds order links", hrefs.length >= 2, hrefs.join(" | "));
   check("shop: Messenger link carries the product reference",
-    hrefs.some((h) => h.includes("m.me/") && h.includes("ref=lavender-sprig-pouch")));
+    hrefs.some((h) => h.includes("m.me/") && h.includes("ref=" + SAMPLE.slug)));
   check("shop: WhatsApp link pre-fills the message",
     hrefs.some((h) => h.includes("wa.me/") && h.includes("text=")) ||
     !hrefs.some((h) => h.includes("wa.me/")),
@@ -423,7 +459,7 @@ const browser = await chromium.launch();
       nodes.every((n) => n.target === "_blank" && n.rel.includes("noopener"))));
 
   check("shop: reference chip is present",
-    (await page.locator("#detail [data-copy='CS-PCH-01']").count()) === 1);
+    (await page.locator("#detail [data-copy='" + SAMPLE.code + "']").count()) === 1);
 
   await page.screenshot({ path: path.join(SHOTS, "shop-detail-1440.png") });
 
@@ -433,8 +469,8 @@ const browser = await chromium.launch();
   check("shop: Escape closes the dialog",
     await page.evaluate(() => !document.getElementById("detail").open));
   check("shop: focus returns to the tile that opened it",
-    await page.evaluate(() => document.activeElement &&
-      document.activeElement.getAttribute("data-detail") === "lavender-sprig-pouch"));
+    await page.evaluate((slug) => document.activeElement &&
+      document.activeElement.getAttribute("data-detail") === slug, SAMPLE.slug));
 
   await page.screenshot({ path: path.join(SHOTS, "shop-1440.png"), fullPage: true });
   check("shop: no console or network errors", problems.length === 0, problems.join(" | "));
@@ -444,26 +480,32 @@ const browser = await chromium.launch();
 /* ===================== desktop: about, contact, 404 ===================== */
 for (const [file, assertions] of [
   ["about.html", async (page) => {
-    check("about: 3 body paragraphs",
-      (await page.locator("[data-render='about-body'] p").count()) === 3);
-    check("about: 2 reviews", (await page.locator("[data-render='reviews'] li").count()) === 2,
-      await page.locator("[data-render='reviews'] li").count());
-    check("about: 4 material rows",
-      (await page.locator("[data-render='materials-list'] li").count()) === 4);
-    check("about: 5 care notes",
-      (await page.locator("[data-render='care-list'] li").count()) === 5);
+    check("about: every story paragraph is rendered",
+      (await page.locator("[data-render='about-body'] p").count()) === CONTENT.about.body.length,
+      String(CONTENT.about.body.length));
+    check("about: every review is rendered",
+      (await page.locator("[data-render='reviews'] li").count()) === CONTENT.about.reviews.length,
+      String(CONTENT.about.reviews.length));
+    check("about: every material row is rendered",
+      (await page.locator("[data-render='materials-list'] li").count()) ===
+        CONTENT.about.materials.items.length);
+    check("about: every care note is rendered",
+      (await page.locator("[data-render='care-list'] li").count()) === CONTENT.about.care.items.length);
     check("about: the mark section frames the full logo",
       ((await page.locator(".mark-plate img").getAttribute("src")) || "").endsWith("logo.svg"));
     check("about: the mark section has its copy",
       (await page.locator("[data-render='mark-body']").innerText()).length > 80);
   }],
   ["contact.html", async (page) => {
-    check("contact: 6 FAQ disclosures",
-      (await page.locator("[data-render='faq'] details").count()) === 6);
-    check("contact: delivery notes rendered",
-      (await page.locator("[data-render='shipping-list'] li").count()) === 4);
-    check("contact: payment notes rendered",
-      (await page.locator("[data-render='payments-list'] li").count()) === 4);
+    check("contact: every FAQ entry is rendered",
+      (await page.locator("[data-render='faq'] details").count()) === CONTENT.contact.faq.length,
+      String(CONTENT.contact.faq.length));
+    check("contact: every delivery note is rendered",
+      (await page.locator("[data-render='shipping-list'] li").count()) ===
+        CONTENT.contact.shipping.items.length);
+    check("contact: every payment note is rendered",
+      (await page.locator("[data-render='payments-list'] li").count()) ===
+        CONTENT.contact.payments.items.length);
     check("contact: channel rows rendered",
       (await page.locator("[data-render='channels'] a").count()) >= 1);
     check("contact: FAQ answers start hidden",
@@ -509,11 +551,11 @@ for (const [file, assertions] of [
   await page.screenshot({ path: path.join(SHOTS, "home-360.png"), fullPage: true });
 
   await page.goto(BASE + "/shop.html", { waitUntil: "load" });
-  await page.waitForSelector("[data-render='products'] > li");
+  await page.waitForSelector("[data-render='products'] > li", { state: "attached" });
   check("mobile 360: shop has no horizontal overflow",
     await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
 
-  await page.locator("[data-detail='bow-garden-tote']").click();
+  await page.locator("[data-detail='" + SAMPLE.slug + "']").click();
   await page.waitForFunction(() => document.getElementById("detail").open);
   check("mobile: dialog fits inside the viewport",
     await page.evaluate(() => {
@@ -613,7 +655,7 @@ for (const [file, assertions] of [
   }
 
   await load(page, BASE + "/shop.html", "[data-render='products'] > li");
-  await page.locator("[data-detail='bow-garden-tote']").click();
+  await page.locator("[data-detail='" + SAMPLE.slug + "']").click();
   await page.waitForFunction(() => document.getElementById("detail").open);
   const dialogIssues = await page.evaluate(contrastProbe);
   check("contrast: product dialog meets WCAG AA", dialogIssues.length === 0,
@@ -787,8 +829,9 @@ for (const [file, assertions] of [
 
     const contentResponse = await fetch(base + "/api/content", { headers: auth });
     const content = await contentResponse.json();
-    check("admin: the content loads", (content.data.products || []).length === 12 &&
-      typeof content.mtime === "number");
+    check("admin: the content loads",
+      (content.data.products || []).length === PRODUCTS.length &&
+      typeof content.mtime === "number", String(content.data.products.length));
 
     /* An invalid save must be refused, and it must say which field is wrong. */
     const broken = JSON.parse(JSON.stringify(content.data));
@@ -887,7 +930,7 @@ for (const [file, assertions] of [
     await page.waitForSelector(".list__item", { timeout: 10000 });
 
     check("editor: every product is listed",
-      (await page.locator(".list__item").count()) === 12,
+      (await page.locator(".list__item").count()) === PRODUCTS.length,
       String(await page.locator(".list__item").count()));
     check("editor: the token is taken out of the address bar",
       !page.url().includes("token"), page.url());
@@ -943,18 +986,19 @@ for (const [file, assertions] of [
     await page.locator("#tabs .tab", { hasText: "Words" }).click();
     await page.waitForSelector("[data-field='about.reviews'] .row", { timeout: 10000 });
     check("editor: the reviews list draws its records",
-      (await page.locator("[data-field='about.reviews'] .row").count()) === 2);
+      (await page.locator("[data-field='about.reviews'] .row").count()) === CONTENT.about.reviews.length);
     check("editor: the materials list draws its rows",
-      (await page.locator("[data-field='about.materials.items'] .row").count()) === 4);
+      (await page.locator("[data-field='about.materials.items'] .row").count()) ===
+        CONTENT.about.materials.items.length);
     check("editor: the FAQ list draws its questions",
-      (await page.locator("[data-field='contact.faq'] .row").count()) === 6);
+      (await page.locator("[data-field='contact.faq'] .row").count()) === CONTENT.contact.faq.length);
     check("editor: the three ordering steps draw",
-      (await page.locator("[data-field='process'] .row").count()) === 3);
+      (await page.locator("[data-field='process'] .row").count()) === CONTENT.process.length);
 
     await page.locator("#tabs .tab", { hasText: "Categories" }).click();
     await page.waitForSelector("[data-field='categories'] .row", { timeout: 10000 });
     check("editor: the categories list draws its records",
-      (await page.locator("[data-field='categories'] .row").count()) === 5);
+      (await page.locator("[data-field='categories'] .row").count()) === CATEGORIES.length);
 
     await page.locator("#tabs .tab", { hasText: "Site" }).click();
     await page.waitForSelector("[data-field='home.heroPhoto']", { timeout: 10000 });

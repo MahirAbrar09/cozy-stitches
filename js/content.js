@@ -67,21 +67,6 @@ window.COZY = {
   ],
   "products": [
     {
-      "slug": "midnight-floral-crossbody",
-      "name": "Midnight Floral Crossbody",
-      "category": "bags",
-      "code": "CS-BAG-02",
-      "price": null,
-      "priceNote": "DM for price",
-      "featured": true,
-      "blurb": "Black canvas crossbody with a loose wildflower spray in moss, marigold and rose.",
-      "description": "A compact crossbody in black cotton canvas, carrying an open spray of daisies, fern leaves and small buds worked in moss, marigold and rose. Large enough for a phone, a purse and keys. The strap adjusts for shoulder or cross-body wear.",
-      "materials": "Cotton canvas, cotton embroidery thread, metal zip and slider",
-      "care": "Hand wash separately in cool water if needed. Dry flat in shade. Do not wring the embroidery.",
-      "images": [],
-      "alt": "Black hand-embroidered crossbody bag with a wildflower spray"
-    },
-    {
       "slug": "denim-bloom-crossbody",
       "name": "Denim Bloom Crossbody",
       "category": "bags",
