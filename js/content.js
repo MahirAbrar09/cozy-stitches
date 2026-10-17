@@ -16,7 +16,7 @@
 window.COZY = {
   "brand": {
     "name": "Cozy Stitches",
-    "tagline": "nuzhat",
+    "tagline": "Love is the thread that connects us to the world.",
     "subline": "Hand-embroidered pieces, made slowly with love.",
     "location": "Bangladesh",
     "category": "Artist"
